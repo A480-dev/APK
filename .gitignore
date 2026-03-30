@@ -1,4 +1,99 @@
-android-tools.zip
-*.zip
-build/
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
 .dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Archivos temporales y de compilación
+*.zip
+*.tar.gz
+*.rar
+android-tools.zip
+
+# Archivos locales
+local.properties
+*.local.properties
+
+# Archivos de log
+*.log
+logs/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de Android SDK
+Android/sdk/
+
+# Archivos de Gradle
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+gradle-wrapper.jar
+gradle/wrapper/
+
+# Archivos de Keystore
+*.keystore
+*.jks
+*.p12
+*.p8
+
+# Archivos de Firebase
+google-services.json
+GoogleService-Info.plist
+
+# Archivos de AdMob
+admob.json
+
+# Archivos de assets temporales
+assets/temp/
+*.tmp
+*.temp
