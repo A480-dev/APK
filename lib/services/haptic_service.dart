@@ -1,8 +1,9 @@
-import 'package:flutter_haptic_feedback/flutter_haptic_feedback.dart';
+import 'package:flutter/services.dart';
 import 'package:blockrush/services/storage_service.dart';
 
 class HapticService {
   static bool _isInitialized = false;
+  static const MethodChannel _channel = MethodChannel('blockrush_haptic');
   
   // Inicializar servicio háptico
   static Future<void> init() async {
@@ -10,15 +11,15 @@ class HapticService {
     
     try {
       // Verificar si el dispositivo soporta feedback háptico
-      final canSupport = await Haptics.canVibrate();
-      if (canSupport) {
+      final canSupport = await _channel.invokeMethod('canVibrate');
+      if (canSupport == true) {
         _isInitialized = true;
-        debugPrint('HapticService inicializado correctamente');
+        print('HapticService inicializado correctamente');
       } else {
-        debugPrint('El dispositivo no soporta feedback háptico');
+        print('El dispositivo no soporta feedback háptico');
       }
     } catch (e) {
-      debugPrint('Error inicializando HapticService: $e');
+      print('Error inicializando HapticService: $e');
       _isInitialized = false;
     }
   }
@@ -35,9 +36,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.light);
+      await _channel.invokeMethod('vibrate', {'type': 'light'});
     } catch (e) {
-      debugPrint('Error en vibración ligera: $e');
+      print('Error en vibración ligera: $e');
     }
   }
   
@@ -46,9 +47,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.medium);
+      await _channel.invokeMethod('vibrate', {'type': 'medium'});
     } catch (e) {
-      debugPrint('Error en vibración media: $e');
+      print('Error en vibración media: $e');
     }
   }
   
@@ -57,9 +58,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.heavy);
+      await _channel.invokeMethod('vibrate', {'type': 'heavy'});
     } catch (e) {
-      debugPrint('Error en vibración fuerte: $e');
+      print('Error en vibración fuerte: $e');
     }
   }
   
@@ -68,9 +69,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.success);
+      await _channel.invokeMethod('vibrate', {'type': 'success'});
     } catch (e) {
-      debugPrint('Error en vibración de éxito: $e');
+      print('Error en vibración de éxito: $e');
     }
   }
   
@@ -79,9 +80,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.warning);
+      await _channel.invokeMethod('vibrate', {'type': 'warning'});
     } catch (e) {
-      debugPrint('Error en vibración de advertencia: $e');
+      print('Error en vibración de advertencia: $e');
     }
   }
   
@@ -90,9 +91,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.error);
+      await _channel.invokeMethod('vibrate', {'type': 'error'});
     } catch (e) {
-      debugPrint('Error en vibración de error: $e');
+      print('Error en vibración de error: $e');
     }
   }
   
@@ -101,9 +102,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.selection);
+      await _channel.invokeMethod('vibrate', {'type': 'selection'});
     } catch (e) {
-      debugPrint('Error en vibración de selección: $e');
+      print('Error en vibración de selección: $e');
     }
   }
   
@@ -112,9 +113,9 @@ class HapticService {
     if (!isEnabled) return;
     
     try {
-      await Haptics.vibrate(HapticsType.impact);
+      await _channel.invokeMethod('vibrate', {'type': 'impact'});
     } catch (e) {
-      debugPrint('Error en vibración de impacto: $e');
+      print('Error en vibración de impacto: $e');
     }
   }
   
@@ -187,7 +188,7 @@ class HapticService {
         }
       }
     } catch (e) {
-      debugPrint('Error en patrón de vibración: $e');
+      print('Error en patrón de vibración: $e');
     }
   }
   
@@ -202,7 +203,7 @@ class HapticService {
         await Future.delayed(const Duration(milliseconds: 200));
       }
     } catch (e) {
-      debugPrint('Error en vibración continua: $e');
+      print('Error en vibración continua: $e');
     }
   }
   
@@ -232,25 +233,10 @@ class HapticService {
   // Verificar si el dispositivo puede vibrar
   static Future<bool> canVibrate() async {
     try {
-      return await Haptics.canVibrate();
+      final result = await _channel.invokeMethod('canVibrate');
+      return result == true;
     } catch (e) {
       return false;
-    }
-  }
-  
-  // Obtener tipos de vibración disponibles
-  static List<HapticsType> getAvailableTypes() {
-    return HapticsType.values;
-  }
-  
-  // Vibración por tipo específico
-  static Future<void> vibrateByType(HapticsType type) async {
-    if (!isEnabled) return;
-    
-    try {
-      await Haptics.vibrate(type);
-    } catch (e) {
-      debugPrint('Error en vibración tipo $type: $e');
     }
   }
   
