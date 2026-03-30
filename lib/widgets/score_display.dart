@@ -67,7 +67,7 @@ class ScoreDisplay extends ConsumerWidget {
                   ),
                 ],
               ),
-            ).animate(target: hasIncreased ? score : null).scaleXY(
+            ).animate(target: hasIncreased ? score.toDouble() : null).scaleXY(
               begin: 1.2,
               end: 1.0,
               duration: const Duration(milliseconds: 300),

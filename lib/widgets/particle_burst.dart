@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:blockrush/config/theme.dart';
 
@@ -50,7 +51,7 @@ class _ParticleBurstState extends State<ParticleBurst>
       
       return Particle(
         angle: angle,
-        velocity: velocity,
+        velocity: velocity.toDouble(),
         color: color,
         size: 4.0 + (index % 3) * 2,
         rotationSpeed: (index % 2 == 0 ? 1 : -1) * (2 + index % 3),
@@ -133,5 +134,3 @@ extension on double {
   double cos() => math.cos(this);
   double sin() => math.sin(this);
 }
-
-import 'dart:math' as math;

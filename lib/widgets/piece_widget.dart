@@ -232,7 +232,7 @@ class DraggablePieceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DragTarget<Piece>(
-      onAccept: (draggedPiece) {
+      onAcceptWithDetails: (details) {
         // Esto se maneja en el tablero
       },
       builder: (context, candidateData, rejectedData) {
@@ -249,7 +249,7 @@ class DraggablePieceWidget extends StatelessWidget {
 // Widget para contenedor de piezas disponibles
 class PiecesContainerWidget extends StatelessWidget {
   final List<Piece> pieces;
-  final Function(Piece piece, int x, int y) onPiecePlaced;
+  final Function(Piece piece)? onPiecePlaced;
   
   const PiecesContainerWidget({
     super.key,

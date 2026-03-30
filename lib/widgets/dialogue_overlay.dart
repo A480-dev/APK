@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -639,5 +640,5 @@ class PentagonPainter extends CustomPainter {
 }
 
 // Funciones matemáticas auxiliares
-double cos(double angle) => angle.cos();
-double sin(double angle) => angle.sin();
+double cos(double angle) => math.cos(angle);
+double sin(double angle) => math.sin(angle);
