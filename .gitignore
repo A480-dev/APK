@@ -1,0 +1,4 @@
+android-tools.zip
+*.zip
+build/
+.dart_tool/
