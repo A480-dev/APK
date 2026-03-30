@@ -3,11 +3,14 @@ workflows:
     name: Android Debug APK
     max_build_duration: 30
     environment:
-      flutter: stable
+      flutter: 3.19.6
+      java: 17
     scripts:
       - name: Get dependencies
         script: flutter pub get
-      - name: Build APK debug
+      - name: Analyze
+        script: flutter analyze --no-fatal-infos
+      - name: Build APK
         script: flutter build apk --debug
     artifacts:
       - build/app/outputs/flutter-apk/app-debug.apk
