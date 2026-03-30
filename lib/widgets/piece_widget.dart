@@ -8,7 +8,7 @@ class PieceWidget extends StatefulWidget {
   final double scale;
   final bool isDraggable;
   final VoidCallback? onTap;
-  final Function(Piece)? onPiecePlaced;
+  final Function(Piece piece, int x, int y)? onPiecePlaced;
   
   const PieceWidget({
     super.key,
@@ -249,7 +249,7 @@ class DraggablePieceWidget extends StatelessWidget {
 // Widget para contenedor de piezas disponibles
 class PiecesContainerWidget extends StatelessWidget {
   final List<Piece> pieces;
-  final Function(Piece piece)? onPiecePlaced;
+  final Function(Piece piece, int x, int y)? onPiecePlaced;
   
   const PiecesContainerWidget({
     super.key,

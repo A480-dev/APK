@@ -6,7 +6,7 @@
 
     <application
         android:label="BlockRush"
-        android:name="com.blockrush.puzzlesurvive.MainActivity"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         
         <!-- App ID de AdMob (TEST - reemplazar en producción) -->

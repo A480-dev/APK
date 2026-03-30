@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:user_messaging_platform/user_messaging_platform.dart';
 import 'config/theme.dart';
 import 'config/admob_ids.dart';
 import 'screens/splash_screen.dart';
@@ -33,19 +32,28 @@ void main() async {
 
 Future<void> _requestConsent() async {
   try {
-    final consentInfo = await ConsentInformation.instance;
-    
-    await consentInfo.requestConsentInfoUpdate();
-    
+    final consentInfo = ConsentInformation.instance;
+
+    await consentInfo.requestConsentInfoUpdate(
+      const ConsentRequestParameters(),
+      () {},
+      (error) {
+        throw Exception(error.message);
+      },
+    );
+
     if (await consentInfo.isConsentFormAvailable()) {
       final status = await consentInfo.getConsentStatus();
-      
+
       if (status == ConsentStatus.required) {
-        await ConsentForm.instance.show();
+        await ConsentForm.loadAndShowConsentFormIfRequired((error) {
+          if (error != null) {
+            throw Exception(error.message);
+          }
+        });
       }
     }
-    
-    // Guardar consentimiento
+
     final consentStatus = await consentInfo.getConsentStatus();
     await StorageService.setGdprConsent(consentStatus != ConsentStatus.denied);
   } catch (e) {

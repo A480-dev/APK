@@ -21,14 +21,24 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dev.flutter.flutter-gradle-plugin'
+}
 
-// Configuración simplificada para Flutter 3.19.0
 android {
-    namespace "com.blockrush.puzzlesurvive"
+    namespace 'com.blockrush.puzzlesurvive'
     compileSdk 34
-    ndkVersion flutter.ndkVersion
+
+    defaultConfig {
+        applicationId 'com.blockrush.puzzlesurvive'
+        minSdk 21
+        targetSdk 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -41,15 +51,6 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    defaultConfig {
-        applicationId "com.blockrush.puzzlesurvive"
-        minSdk 21
-        targetSdk 34
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-        multiDexEnabled true
     }
 
     buildTypes {
